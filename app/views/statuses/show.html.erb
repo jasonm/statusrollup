@@ -8,7 +8,6 @@
     <div class="commit-author-and-contributor">
       <%= image_tag @commit_status.commit_author_gravatar_url %>
       <span class="naming"><%= @commit_status.commit_author %></span>
-    Status for :
       <span class="sha"><%= link_to @commit_status.sha, @github_commit_url %></span>
     </div>
   </div>
