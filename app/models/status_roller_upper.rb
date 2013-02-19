@@ -36,7 +36,7 @@ class StatusRollerUpper
 
   def mark(state, description)
     Rails.logger.info("Going to mark #{sha} as #{state}: #{description}")
-    target_url = "#{HOST}/status/#{repo_user_name}/#{repo_name}/#{sha}"
+    target_url = "#{HOST}/statuses/#{repo_user_name}/#{repo_name}/#{sha}"
 
     github.repos.statuses.create(repo_user_name, repo_name, sha, {
     # GithubRepos.new(repo.user).set_status(repo_user_name, repo_name, sha, {
