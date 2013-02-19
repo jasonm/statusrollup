@@ -16,7 +16,6 @@ such discussion in [GitHub issues](https://github.com/jasonm/statusrollup/issues
 
 Build status
 ------------
-This isn't installed yet but should be eventually:
 
 [![Build Status](https://secure.travis-ci.org/jasonm/statusrollup.png)](http://travis-ci.org/jasonm/statusrollup)
 
