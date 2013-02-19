@@ -13,7 +13,9 @@
   </div>
 </header>
 
-<h3>Most recent status per tool:</h3>
+<header>
+  <h2>Most recent status per tool:</h2>
+</header>
 
 <ul class="statuses most-recent-statuses">
   <% @commit_status.other_tool_statuses.each do |tool, status| %>
@@ -24,7 +26,9 @@
 <a href="#" class="btn" data-reveal="full-history">Show full history&hellip;</a>
 
 <div id="full-history" style="display: none;">
-  <h3>Full history per tool:</h3>
+  <header>
+    <h2>Full history per tool:</h2>
+  </header>
 
   <% @commit_status.other_tools.each do |tool| %>
     <h4>History for <%= tool %>:</h4>
