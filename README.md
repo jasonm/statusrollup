@@ -7,7 +7,12 @@ to attach a status to your GitHub projects' commits and pull requests.
 Unfortunately there is a last-one-wins situation where multiple tools
 cannot be effectively used on the same project.
 
-StatusRollup aims to fix this by aggregating commit statuses from other tools.
+StatusRollup aims to fix this by aggregating commit statuses from other tools:
+
+![Status rolled up](https://f.cloud.github.com/assets/1031/170562/74a70024-7a70-11e2-9812-8dca9e88c488.jpg)
+
+![Many statuses revealed](https://f.cloud.github.com/assets/1031/170563/76a66d60-7a70-11e2-96db-4048e8494c50.jpg)
+
 
 This project is a work-in-progress.  Any and all feedback is welcome!
 
