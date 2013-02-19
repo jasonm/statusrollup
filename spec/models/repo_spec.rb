@@ -24,6 +24,7 @@ describe Repo do
 
     hook_inputs = {
       'name' => 'web',
+      'events' => 'status',
       'config' => {
         'url' => "#{HOST}/repo_hook"
       }
@@ -45,6 +46,7 @@ describe Repo do
 
     hook_inputs = {
       'name' => 'web',
+      'events' => 'status',
       'config' => {
         'url' => "#{HOST}/repo_hook"
       }

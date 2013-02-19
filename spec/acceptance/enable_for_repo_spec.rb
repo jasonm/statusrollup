@@ -44,11 +44,11 @@ feature "Enabling StatusRollup on a repo" do
 
     page.should have_content('StatusRollup is enabled for jasonm/beta')
 
-    visit '/status/jasonm/beta'
+    visit '/statuses/jasonm/beta'
     page.should have_content('StatusRollup is enabled for jasonm/beta')
 
     visit '/sign_out'
-    visit '/status/jasonm/beta'
+    visit '/statuses/jasonm/beta'
     page.should have_content('StatusRollup is enabled for jasonm/beta')
   end
 
@@ -98,6 +98,7 @@ feature "Enabling StatusRollup on a repo" do
 
     inputs = {
       'name' => 'web',
+      'events' => 'status',
       'config' => {
         'url' => "#{HOST}/repo_hook"
       }
@@ -117,6 +118,7 @@ feature "Enabling StatusRollup on a repo" do
 
     inputs = {
       'name' => 'web',
+      'events' => 'status',
       'config' => {
         'url' => "#{HOST}/repo_hook"
       }

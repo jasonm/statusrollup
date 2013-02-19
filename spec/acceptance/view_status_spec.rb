@@ -25,5 +25,8 @@ feature 'Rolling up commit statuses for a SHA' do
   scenario 'view aggregate status'
   scenario 'view per-service status with details'
   scenario 'view historical status with details'
-  scenario 'set aggregate status on the commit'
+  scenario 'set aggregate status on the commit when everything passes'
+  scenario 'set aggregate status on the commit when some things fail'
+  scenario 'set aggregate status on the commit when some things error'
+  scenario 'set aggregate status on the commit when some things are pending'
 end
