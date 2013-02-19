@@ -1,0 +1,53 @@
+<header>
+  <h2>
+    Status for <%= @commit_status.user_name %>/<%= @commit_status.repo_name %> <%= link_to "commit", @github_commit_url %>:
+  </h2>
+
+  <div class="commit-details">
+    <div class="commit-message"><%= @commit_status.commit_message %></div>
+    <div class="commit-author-and-contributor">
+      <%= image_tag @commit_status.commit_author_gravatar_url %>
+      <span class="naming"><%= @commit_status.commit_author %></span>
+    Status for :
+      <span class="sha"><%= link_to @commit_status.sha, @github_commit_url %></span>
+    </div>
+  </div>
+</header>
+
+<h3>Most recent status per tool:</h3>
+
+<ul class="statuses most-recent-statuses">
+  <% @commit_status.other_tool_statuses.each do |tool, status| %>
+    <%= render :partial => 'detail', locals: { tool: tool, status: status } %>
+  <% end %>
+</ul>
+
+<a href="#" class="btn" data-reveal="full-history">Show full history&hellip;</a>
+
+<div id="full-history" style="display: none;">
+  <h3>Full history per tool:</h3>
+
+  <% @commit_status.other_tools.each do |tool| %>
+    <h4>History for <%= tool %>:</h4>
+    <ul class="statuses most-recent-statuses">
+      <% @commit_status.historical_statuses_for(tool).each do |status| %>
+        <%= render :partial => 'detail', locals: { tool: tool, status: status } %>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    //<![CDATA[
+      $(function() {
+        $('a[data-reveal]').click(function(e) {
+          e.preventDefault();
+          var targetId = $(e.target).data('reveal');
+          $('#' + targetId).show();
+          $(e.target).hide();
+        });
+      });
+    //]]>
+  </script>
+<% end %>

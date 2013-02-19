@@ -1,0 +1,14 @@
+<li class="status status-<%= status['state'] %>">
+  <div class="title">
+    <img src="http://<%= tool %>/favicon.ico" style="height: 16px; width: 16px;">
+    <%= tool %>
+    <span class="pull-right"><%= DateTime.parse(status['created_at']).to_s(:rfc822) %></span>
+  </div>
+  <div class="body">
+    <strong><%= status['state'].capitalize %>:</strong>
+    <%= status['description'] %>
+  </span>
+  <div class="link">
+    <%= link_to "More details&hellip;".html_safe, status['target_url'] %>
+  </div>
+</li>

@@ -10,6 +10,7 @@ class Repo < ActiveRecord::Base
   def create_github_repo_hook
     hook_inputs = {
       'name' => 'web',
+      'events' => 'status',
       'config' => {
         'url' => "#{HOST}/repo_hook"
       }

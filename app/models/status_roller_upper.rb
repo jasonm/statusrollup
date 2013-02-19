@@ -1,41 +1,68 @@
 class StatusRollerUpper
-  STATUS_DESCRIPTIONS = {
-    'success' => 'StatusRollup loves this commit',
-    'failure' => 'StatusRollup is sad about this commit'
-  }
-
-  def initialize(push)
-    @push = push
+  def initialize(payload)
+    @payload = payload
   end
 
   def rollup
-    Rails.logger.info("PushStatusChecker#check_and_update for push #{@push.user_name}/#{@push.repo_name}:#{@push.commits.map(&:id).join(',')}")
+    Rails.logger.info("StatusRollerUpper#rollup for #{repo_user_name}/#{repo_name}:#{sha}")
+    commit_status = CommitStatus.new(repo_user_name, repo_name, sha)
+    Rails.logger.info(commit_status.other_tool_statuses.inspect)
 
-    @push.commits.each do |commit|
-      check_commit(commit)
+    status_values = commit_status.other_tool_statuses.values.map { |status| status['state'] }.uniq
+    return if status_values.empty?
+
+    status_phrases = {
+      'pending' => 'is pending',
+      'error' => 'has errored',
+      'failure' => 'failed',
+      'success' => 'succeeded'
+    }
+
+
+    description = commit_status.other_tool_statuses.map { |tool, status| "#{tool} #{status_phrases[status['state']]}" }.join('. ')
+
+    if status_values.include?('pending')
+      mark('pending', description)
+    elsif status_values.include?('error')
+      mark('error', description)
+    elsif status_values.include?('failure')
+      mark('failure', description)
+    elsif status_values.include?('success')
+      mark('success', description)
     end
   end
 
   private
 
-  def check_commit(commit)
-    mark(commit, 'success')
+  def mark(state, description)
+    Rails.logger.info("Going to mark #{sha} as #{state}: #{description}")
+    target_url = "#{HOST}/status/#{repo_user_name}/#{repo_name}/#{sha}"
 
-    # TODO: logic should fetch other commit statuses, demux by tool, and decide if succes/failure
-    # if all_tools_passing?
-    #   mark(commit, 'success')
-    # else
-    #   mark(commit, 'failure')
-    # end
-  end
-
-  def mark(commit, state)
-    target_url = "#{HOST}/agreements/#{@push.user_name}/#{@push.repo_name}"
-
-    GithubRepos.new(repo_agreement.user).set_status(@push.user_name, @push.repo_name, sha = commit.id, {
+    github.repos.statuses.create(repo_user_name, repo_name, sha, {
+    # GithubRepos.new(repo.user).set_status(repo_user_name, repo_name, sha, {
       state: state,
       target_url: target_url,
-      description: STATUS_DESCRIPTIONS[state]
+      description: description
     })
+  end
+
+  def repo_user_name
+    @payload.repository.owner.login
+  end
+
+  def repo_name
+    @payload.repository.name
+  end
+
+  def sha
+    @payload.sha
+  end
+
+  def github
+    @github ||= repo.user.github
+  end
+
+  def repo
+    @repo ||= Repo.find_by_user_name_and_repo_name(repo_user_name, repo_name)
   end
 end

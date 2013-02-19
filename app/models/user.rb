@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   def self.find_by_email_or_nickname(email, nickname)
     self.where("email = ? OR nickname = ?", email, nickname).first
   end
+
+  def github
+    @github ||= Github.new(oauth_token: self.oauth_token)
+  end
 end

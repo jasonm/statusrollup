@@ -92,3 +92,69 @@ form.form-horizontal .field_with_errors {
 .field_with_errors {
   @include formFieldState($errorText, $errorText, $errorBackground);
 }
+
+body.statuses-show {
+  div.commit-details {
+    @extend .alert;
+    @extend .alert-info;
+    padding: 0;
+
+    color: $grayDark;
+
+    div.commit-message {
+      padding: 8px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    div.commit-author-and-contributor {
+      padding: 8px;
+
+      background-color: white;
+
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 3px;
+      }
+
+      span.naming {
+        height: 32px;
+        font-weight: bold;
+      }
+
+      span.sha {
+        @extend .pull-right;
+        font-family: Monaco, Menlo, Consolas, "Courier New", monospace
+      }
+    }
+  }
+
+  ul.statuses {
+    @extend .unstyled;
+
+    li.status {
+      @extend .alert;
+      padding: 0;
+
+      div.title {
+        padding: 8px;
+      }
+
+      div.body {
+        padding: 8px;
+        background-color: white;
+      }
+
+      div.link {
+        padding: 8px;
+        background-color: white;
+      }
+    }
+
+    li.status-success { @extend .alert-success; }
+    li.status-failure { @extend .alert-error; }
+    li.status-pending { @extend .alert-info; }
+    li.status-error   { @extend .alert-warning; }
+  }
+}

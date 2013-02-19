@@ -9,8 +9,8 @@ StatusRollup::Application.routes.draw do
   resources :repos, only: [:new, :create]
 
   constraints :repo_name => /[^\/]+/ do
-    get 'status/:user_name/:repo_name' => 'repos#show', :as => :repo
-    get 'status/:user_name/:repo_name/:sha' => 'statuses#show', :as => :status
+    get 'statuses/:user_name/:repo_name' => 'repos#show', :as => :repo
+    get 'statuses/:user_name/:repo_name/:sha' => 'statuses#show', :as => :status
   end
 
   post 'repo_hook' => 'github_webhooks#repo_hook'
