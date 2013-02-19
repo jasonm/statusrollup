@@ -21,6 +21,16 @@ class CommitStatus
     commit_payload['author']['avatar_url']
   end
 
+  def rollup_up_to_date?
+    tool_recency_pairs = all_tools.map { |tool| [Time.parse(most_recent_status_for(tool)['created_at']), tool] }
+
+    most_recent_pair = tool_recency_pairs.sort_by { |(date, tool)| date }.last
+    most_recent_tool = most_recent_pair[1]
+
+    Rails.logger.info("Examining most recent tool for #{sha}:\n#{tool_recency_pairs.sort_by { |pair| pair[0] }.inspect}")
+    most_recent_tool == tool_for_this_very_app_yes_this_one
+  end
+
   def other_tool_statuses
     tool_status_pairings = other_tools.map { |tool| [tool, most_recent_status_for(tool)] }.flatten
     Hash[*tool_status_pairings]
@@ -44,6 +54,12 @@ class CommitStatus
     status_payload.
       map { |status_hash| tool_for_status_hash(status_hash) }.
       reject { |tool| tool == tool_for_this_very_app_yes_this_one }.
+      uniq
+  end
+
+  def all_tools
+    status_payload.
+      map { |status_hash| tool_for_status_hash(status_hash) }.
       uniq
   end
 

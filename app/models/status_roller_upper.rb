@@ -6,10 +6,13 @@ class StatusRollerUpper
   def rollup
     Rails.logger.info("StatusRollerUpper#rollup for #{repo_user_name}/#{repo_name}:#{sha}")
     commit_status = CommitStatus.new(repo_user_name, repo_name, sha)
-    Rails.logger.info(commit_status.other_tool_statuses.inspect)
+
+    if commit_status.rollup_up_to_date?
+      Rails.logger.info("The commit status for #{sha} is up to date!  Going about my other business...")
+      return
+    end
 
     status_values = commit_status.other_tool_statuses.values.map { |status| status['state'] }.uniq
-    return if status_values.empty?
 
     status_phrases = {
       'pending' => 'is pending',
@@ -17,7 +20,6 @@ class StatusRollerUpper
       'failure' => 'failed',
       'success' => 'succeeded'
     }
-
 
     description = commit_status.other_tool_statuses.map { |tool, status| "#{tool} #{status_phrases[status['state']]}" }.join('. ')
 
