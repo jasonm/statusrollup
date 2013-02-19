@@ -6,7 +6,6 @@ class ReposController < ApplicationController
 
   def create
     @repo = current_user.repos.new
-    # binding.pry
     if params[:repo]
       @repo.user_name, @repo.repo_name = params[:repo][:user_name_repo_name].split('/')
     end

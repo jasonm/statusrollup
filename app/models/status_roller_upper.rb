@@ -41,7 +41,6 @@ class StatusRollerUpper
     target_url = "#{HOST}/statuses/#{repo_user_name}/#{repo_name}/#{sha}"
 
     github.repos.statuses.create(repo_user_name, repo_name, sha, {
-    # GithubRepos.new(repo.user).set_status(repo_user_name, repo_name, sha, {
       state: state,
       target_url: target_url,
       description: description
