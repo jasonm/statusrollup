@@ -21,6 +21,6 @@ end
 HOST = ENV['HOST'] || {
   'development' => development_host,
   'test'        => 'http://example.com',
-  'production'  => 'http://clahub.com'
+  'production'  => 'http://statusrollup.herokuapp.com'
 }[Rails.env]
 

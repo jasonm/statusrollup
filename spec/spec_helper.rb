@@ -73,10 +73,6 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   config.before do
-    CheckOpenPullsJob.enabled = false
-  end
-
-  config.before do
     Capybara.default_host = HOST
   end
 

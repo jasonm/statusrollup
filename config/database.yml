@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: clahub_development
+  database: status_rollup_development
   pool: 5
   username:
   password:
@@ -9,7 +9,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: clahub_test
+  database: status_rollup_test
   pool: 5
   username:
   password:
@@ -17,7 +17,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: clahub_production
+  database: status_rollup_production
   pool: 5
   username:
   password:

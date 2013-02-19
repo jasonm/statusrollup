@@ -1,0 +1,13 @@
+<header>
+  <h1>StatusRollup is enabled for <%= @repo.user_name %>/<%= @repo.repo_name %></h1>
+</header>
+
+<div class="row">
+  Yep.
+</div>
+
+<% if @repo.owned_by?(current_user) %>
+  <div class="row">
+    And you own it.
+  </div>
+<% end %>

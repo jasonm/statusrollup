@@ -4,9 +4,9 @@ Heroku
 First, install [Heroku toolbelt](https://toolbelt.heroku.com/) and follow their
 "Getting started" instructions.
 
-Then, for an app named "my-clahub":
+Then, for an app named "my-statusrollup":
 
-    heroku create my-clahub
+    heroku create my-statusrollup
     heroku config:add SECRET_TOKEN=some-random-key-with-plenty-of-entropy-here
 
 Note that the `SECRET_TOKEN` MUST be at least 30 characters.
@@ -27,10 +27,10 @@ OAuth key/secret pair, and add it to the Heroku environment:
 Domain name
 ------------------
 
-If you want to enforce a canonical hostname (e.g. host at www.my-clahub.com and
-redirect my-clahub.herokuapp.com to www.my-clahub.com):
+If you want to enforce a canonical hostname (e.g. host at www.my-statusrollup.com and
+redirect my-statusrollup.herokuapp.com to www.my-statusrollup.com):
 
-    heroku domains:add www.my-clahub.com
-    heroku config:add CANONICAL_URL=www.my-clahub.com
+    heroku domains:add www.my-statusrollup.com
+    heroku config:add CANONICAL_URL=www.my-statusrollup.com
 
-At your DNS provider, add a CNAME from www.my-clahub.com to my-clahub.herokuapp.com
+At your DNS provider, add a CNAME from www.my-statusrollup.com to my-statusrollup.herokuapp.com

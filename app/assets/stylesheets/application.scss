@@ -25,60 +25,19 @@ div#how-it-works {
   margin-top: 75px;
 }
 
-div#how-it-works.carousel {
-  margin-left: auto;
-  margin-right: auto;
-
-  h2 {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  div.item {
-    height: 800px;
-
-    img {
-      @extend .img-rounded;
-    }
-  }
-}
-
 div#user_name_repo_name_chzn {
   margin-bottom: 27px;
 }
 
-body.agreements-new {
-  div#agreement-editor-content {
-    textarea {
-      resize: vertical;
-      height: 220px;
-    }
-  }
-}
-
-body.agreements-show,
-body.signatures-create {
+body.repos-show,
+body.repos-create {
   header {
     @extend .row;
   }
 
-  div#agreement-text {
-    @extend .well;
-    margin-top: 27px;
-  }
-
-  button#agreement-submit {
+  button#repo-submit {
     @extend .btn, .btn-primary, .btn-large;
     @extend .span4;
-  }
-
-  a#sign-in-to-agree {
-    @extend .btn, .btn-primary, .btn-large;
-    @extend .span4;
-  }
-
-  a#already-agreed {
-    @extend .btn, .btn-success, .btn-large, .disabled;
   }
 
   div#signing-users {

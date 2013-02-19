@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Clahub::Application.load_tasks
+StatusRollup::Application.load_tasks

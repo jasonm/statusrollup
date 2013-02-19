@@ -4,9 +4,9 @@ class GithubWebhooksController < ApplicationController
 
     Rails.logger.info(event.inspect)
 
-    if event == 'push'
-      payload = GithubPush.new(params[:payload])
-      PushStatusChecker.new(payload).check_and_update
+    if event == 'status'
+      payload = Hashie::Mash.new(JSON.parse(json))
+      StatusRollerUpper.new(payload).rollup
     end
 
     render text: "OK", status: 200
