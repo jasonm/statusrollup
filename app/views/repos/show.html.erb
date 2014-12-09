@@ -1,8 +1,0 @@
-<header>
-  <h1>StatusRollup is enabled for <%= @repo.user_name %>/<%= @repo.repo_name %></h1>
-</header>
-
-<div class="row">
-  <p>View the status of specific commits at a URL like:</p> 
-  <pre><%= status_url(@repo.user_name, @repo.repo_name, "some-sha-here") %></pre>
-</div>
